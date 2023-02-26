@@ -28,10 +28,10 @@ jobs:
           git init -b main
           git remote add origin git@github.com:DeepakSinghKetheth25/spring-data-redis-demo.git
           
-      - name: GitHub Pull From master
-        run: |
-          git config github.token ${{ secrets.GITHUB_TOKEN }}
-          git pull origin master
+#      - name: GitHub Pull From master
+#        run: |
+#          git config github.token ${{ secrets.GITHUB_TOKEN }}
+#          git pull origin master
           
 #      - name: Setup SSH Keys and known_hosts
 #        env:
