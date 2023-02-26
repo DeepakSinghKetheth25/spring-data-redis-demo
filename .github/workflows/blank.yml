@@ -1,0 +1,86 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Download Files from Azure Container
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  schedule:
+    - cron: '* * * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      
+      - name: Git init
+        run: |
+          git init --initial-branch=main
+          git init -b main
+          git remote add origin git@github.com:DeepakSinghKetheth25/spring-data-redis-demo.git
+          
+#      - name: Setup SSH Keys and known_hosts
+#        env:
+#            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+#        run: |
+#            mkdir -p ~/.ssh
+#            ssh-keyscan github.com >> ~/.ssh/known_hosts
+#            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+#            ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+          
+      
+      - name: Copy files
+        uses: ulaval/azure-blob-copy-action@v1
+        with:
+          path: './oksystemsltd/translationsTesting'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}   
+          github_token: ${{ secrets.GITHUB_TOKEN }} 
+          action: download
+          connection_string: ${{ secrets.CONNECTION_STRING }}
+          container_name: translations
+          local_directory: src/main/resources/uploadToOneSky-2
+
+
+      - name : View downloaded file
+        run: |
+          cat src/main/resources/uploadToOneSky-2/features.json
+          cat src/main/resources/uploadToOneSky-2/abc.json
+          
+      - name: Git status
+        run: |
+           git status
+      - name: Git remote
+        run: |
+          git remote -v
+          
+      - name: Git branch
+        run : |
+          git branch -a
+          
+      - name: Git status
+        run: |
+          git status
+      - name: Git Add
+        run: |
+          git add "src/main/resources/uploadToOneSky-2/features.json"
+          git add "src/main/resources/uploadToOneSky-2/abc.json"
+      - name: Git Pull
+        run: |
+          git pull origin master
+          
+      - name: GitHub Commit & Push
+        uses: actions-js/push@v1.4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          author_email: deepaksinghketheth@gmail.com
+          message: 'Commit updated files'
+          branch: 'master'
