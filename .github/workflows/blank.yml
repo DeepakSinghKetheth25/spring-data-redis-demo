@@ -28,6 +28,11 @@ jobs:
           git init -b main
           git remote add origin git@github.com:DeepakSinghKetheth25/spring-data-redis-demo.git
           
+      - name: GitHub Pull From master
+        run: |
+          git config github.token ${{ secrets.GITHUB_TOKEN }}
+          git pull origin master
+          
 #      - name: Setup SSH Keys and known_hosts
 #        env:
 #            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -73,9 +78,6 @@ jobs:
         run: |
           git add "src/main/resources/uploadToOneSky-2/features.json"
           git add "src/main/resources/uploadToOneSky-2/abc.json"
-      - name: Git Pull
-        run: |
-          git pull origin master
           
       - name: GitHub Commit & Push
         uses: actions-js/push@v1.4
