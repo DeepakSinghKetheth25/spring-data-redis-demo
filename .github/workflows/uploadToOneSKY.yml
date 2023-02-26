@@ -8,13 +8,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    
+      - name: Github Workspace
+        run: |
+          echo ${{ github.workspace }}
+          
       - name: OneSky File uploader
         uses: gndelia/onesky-uploader-action@v0.1.0
         with:  
           projectId: "388361" # projectId from OneSky stored in GH secrets
           publicKey: "S2RQU74NzKwdNHlxagszjsTPRGyoqk39" # publicKey from OneSky stored in GH secrets
           privateKey: "i9gc71po2CQSNckiUD44yc9uGzWSGTWO" # privateKey from OneSky stored in GH secrets
-          filepath: ./src/main/resources/uploadToOneSky # Do not include the filename here
+          filepath: ../src/main/resources/uploadToOneSky # Do not include the filename here
           filename: zzz.json # filename
           locale: en-US
           fileformat: HIERARCHICAL_JSON
