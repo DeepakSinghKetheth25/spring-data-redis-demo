@@ -1,0 +1,125 @@
+query GetInspectionLogForGoPage($REFID: String!) {
+    inspectionLog: inspectionLogWithREFID(REFID: $REFID) {
+      id
+      assigneeList {
+        active
+        dueDate
+        setByUserId
+        setDatess
+        userId
+      }
+      inspectedSize
+      contactList {
+        ...${ContactModel.fragmentNameContacts}
+      }
+      lotSize
+      endDate
+      startDate
+      organisationId
+      passedAsFixed
+      passedAsFlawless
+      passedAsTolerated
+      REFID
+      rejected
+      sourceId
+      sourceType
+      status
+      inspectionLogStage
+      inspectionLogDocumentAssetList {
+        documentAsset {
+          id
+          applicableMarketList
+          coveredLanguageList
+          documentName
+          documentNumber
+          documentStandardList
+          documentType
+          madeByOrganisation {
+            name
+          }
+          REFID
+          validFrom
+          validTill
+        }
+        inspectionLogAssetSource
+      }
+      inspectionLogFindingList {
+        id
+      }
+      inspectionLogNoteAssetList {
+        id
+        taggedInspectionLogTestAssetId
+        unversionedNoteAsset {
+          textContentMap
+        }
+      }
+      inspectionLogTestAssetList {
+        ...${InspectionLogTestAssetModel.fragmentName}
+      }
+      inspectionOrganisation {
+        id
+        addressList {
+          countryCode
+        }
+        conformityPoint
+        name
+        OKID
+        reliabilityPointForPublishedLogs
+      }
+      inspectionOrganisationId
+      inspector {
+        OKID
+        reliabilityPointForPublishedLogs
+      }
+      item {
+        id
+        assemblyItemList {
+          item {
+            ...${ItemModel.fragmentNameAssemblyArchiveCard}
+          }
+          quantity
+        }
+        OKID
+        product {
+          productChildProductList {
+        childProduct {
+          ...${ProductModel.fragmentNameArchiveCard}
+        }
+        publishStatus
+        quantity
+        status
+      }
+          id
+          conformityPoint
+          name
+          organisation {
+            id
+            addressList {
+              countryCode
+            }
+          }
+          
+          productMediaAssetList {
+            mediaAsset {
+              imageData {
+                imageURL
+              }
+            }
+          }
+        }
+        reliabilityPointForPublishedLogs
+      }
+      site {
+        id
+        ...${SiteModel.fragmentNameArchiveCard}
+      }
+      linkedOrder {
+        REFID
+        id
+        orderIdentifierList {
+          id
+          orderIdentifier
+        }
+      }
+
+    }

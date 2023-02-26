@@ -1,0 +1,39 @@
+{
+    "ID_01" : {
+
+        "CATEGORYTYPE" : "AREA",
+        "SUBTYPE" : "PRODUCTS",
+        "SHORT_DESCRIPTION" : "short desc",
+        "LONG_DESCRIPTION" : "long descripiton", 
+        "IMAGE_URL" : "same for all"
+    },
+    
+    "ID_02" : {
+
+        "CATEGORYTYPE" : "AREA",
+        "SUBTYPE" : "PRODUCTS",
+        "SHORT_DESCRIPTION" : "short desc",
+        "LONG_DESCRIPTION" : "long descripiton", 
+        "IMAGE_URL" : "same for all"
+    },
+    
+	"ID_03" : {
+
+        "CATEGORYTYPE" : "industry",
+        "SUBTYPE" : "children's products",
+        "SHORT_DESCRIPTION" : "short desc",
+        "LONG_DESCRIPTION" : "id03 long descripiton", 
+        "IMAGE_URL" : "id03 desc"
+    },
+    
+    "ID_04" : {
+
+        "CATEGORYTYPE" : "AREA",
+        "SUBTYPE" : "PRODUCTS",
+        "SHORT_DESCRIPTION" : "short desc",
+        "LONG_DESCRIPTION" : "id04 long descripiton", 
+        "IMAGE_URL" : "id04 same for all"
+    }
+
+
+}
