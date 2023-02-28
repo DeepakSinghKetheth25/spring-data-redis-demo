@@ -19,10 +19,12 @@ jobs:
           
       - name: Create DevHash
         id: devhash
-        run: |          
-          echo "DEVHASH=$( echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum )" >>$GITHUB_OUTPUT
+        run: |    
+          echo "DEVHASH=(echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum | awk '{print $1}')" >>$GITHUB_OUTPUT
           echo ${{ steps.timestamp.outputs.TIMESTAMP }}
           echo ${{ steps.devhash.outputs.DEVHASH }}
+#          echo "DEVHASH=$( echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum )" >>$GITHUB_OUTPUT
+
           
       - name: Upload To Onesky    
         env:
