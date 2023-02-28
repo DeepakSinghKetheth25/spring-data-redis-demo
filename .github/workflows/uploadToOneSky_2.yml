@@ -2,7 +2,7 @@ name: Upload translation file Using Upload API
 
 on:
   schedule:
-  - cron: '* * * * 4' 
+  - cron: '* * * * *' 
 
 jobs:
   build:
@@ -20,9 +20,16 @@ jobs:
       - name: Create DevHash
         id: devhash
         run: |    
-          echo "DEVHASH=$(echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum | awk '{print $1}' )" >> $GITHUB_OUTPUT
+          echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}"i9gc71po2CQSNckiUD44yc9uGzWSGTWO" | md5sum | awk '{print $1}' > hash.txt
           echo ${{ steps.timestamp.outputs.TIMESTAMP }}
+          echo  cat hash.txt
+          echo "DEVHASH=$(cat hash.txt)" >> $GITHUB_OUTPUT 
           echo ${{ steps.devhash.outputs.DEVHASH }}
+        
+        
+#          echo "DEVHASH=$(echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum | awk '{print $1}' )" >> $GITHUB_OUTPUT
+#          echo ${{ steps.timestamp.outputs.TIMESTAMP }}
+#          echo ${{ steps.devhash.outputs.DEVHASH }}
           
 #          echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum 
 #          echo "DEVHASH=$( echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum )" >>$GITHUB_OUTPUT
@@ -33,6 +40,7 @@ jobs:
           FILE_PATH: 'src/main/resources/uploadToOneSky/zzz.json'
           FILE_FORMAT: 'HIERARCHICAL_JSON'
         run: |
+          echo ${{ steps.devhash.outputs.DEVHASH }}
           curl -X POST https://platform.api.onesky.io/1/projects/:project_id/files \
           -H 'Content-Type: application/json' \
           -d '{"api_key": "S2RQU74NzKwdNHlxagszjsTPRGyoqk39", "timestamp": ${{ steps.timestamp.outputs.TIMESTAMP }}, \ 
