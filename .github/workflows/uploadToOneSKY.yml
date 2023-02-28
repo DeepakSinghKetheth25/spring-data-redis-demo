@@ -10,8 +10,10 @@ jobs:
     steps:
     
       - name: Github Workspace
-        run: |
-          echo ${{ github.workspace }}
+        run: ${{ github.workspace }}
+
+      - name: List files    
+        run : ls -la
           
       - name: OneSky File uploader
         uses: gndelia/onesky-uploader-action@v0.1.0
