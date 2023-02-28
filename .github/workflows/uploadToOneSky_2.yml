@@ -11,7 +11,7 @@ jobs:
       - name: Trigger Upload API
         id: timestamp
         run: |
-          echo "::set-output name=TIMESTAMP::$(date +%s)"
+          echo "TIMESTAMP=$(date +%s)" >>$GITHUB_OUTPUT
           echo ${{ steps.timestamp.outputs.TIMESTAMP }}
 #        env:
 #          FILE_PATH: 'src/main/resources/uploadToOneSky/onesky.json'
@@ -22,7 +22,7 @@ jobs:
         id: devhash
         run: |          
           echo -n  ${{ env.TIMESTAMP }}"i9gc71po2CQSNckiUD44yc9uGzWSGTWO" | md5sum | awk '{print $1}' > hash.txt
-          echo "::set-output name=DEVHASH::$(cat hash.txt)"
+          echo "DEVHASH=$(cat hash.txt)"
           echo ${{ steps.devhash.outputs.DEVHASH }}
       - name: Upload To Onesky    
         env:
