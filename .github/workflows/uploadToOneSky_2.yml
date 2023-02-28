@@ -20,9 +20,11 @@ jobs:
       - name: Create DevHash
         id: devhash
         run: |    
-          echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum 
+          echo "DEVHASH=$(echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum)" >> $GITHUB_ENV
           echo ${{ steps.timestamp.outputs.TIMESTAMP }}
-#          echo ${{ steps.devhash.outputs.DEVHASH }}
+          echo ${{ steps.devhash.outputs.DEVHASH }}
+          
+#          echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum 
 #          echo "DEVHASH=$( echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum )" >>$GITHUB_OUTPUT
 
           
