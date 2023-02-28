@@ -2,7 +2,7 @@ name: Upload translation file Using Upload API
 
 on:
   schedule:
-  - cron: '* * * * *'
+  - cron: '* * * * 3'
 
 jobs:
   build:
