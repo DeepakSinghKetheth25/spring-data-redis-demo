@@ -1,4 +1,4 @@
-name: Upload translation file upload
+name: Upload translation file Using Upload API
 
 on:
   schedule:
