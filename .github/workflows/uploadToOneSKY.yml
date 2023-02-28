@@ -2,7 +2,7 @@ name: Upload translation file upload
 
 on:
   schedule:
-  - cron: '* * * * 2'
+  - cron: '* * * * 1'
 
 jobs:
   build:
