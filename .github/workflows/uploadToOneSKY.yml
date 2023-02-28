@@ -18,8 +18,8 @@ jobs:
           projectId: "388361" # projectId from OneSky stored in GH secrets
           publicKey: "S2RQU74NzKwdNHlxagszjsTPRGyoqk39" # publicKey from OneSky stored in GH secrets
           privateKey: "i9gc71po2CQSNckiUD44yc9uGzWSGTWO" # privateKey from OneSky stored in GH secrets
-          filepath: uploadToOneSky # Do not include the filename here
-          filename: zzz.json # filename
+          filepath: src/main/resources/uploadToOneSky # Do not include the filename here
+          filename: features_en.json # filename
           locale: en-US
           fileformat: HIERARCHICAL_JSON
           isKeepingAllStrings: false
