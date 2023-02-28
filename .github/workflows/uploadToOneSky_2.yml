@@ -8,23 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Upload API
+      - name: Generate Timestamp
         id: timestamp
         run: |
           echo "TIMESTAMP=$(date +%s)" >>$GITHUB_OUTPUT
-#        env:
-#          FILE_PATH: 'src/main/resources/uploadToOneSky/onesky.json'
-#          FILE_FORMAT: 'HIERARCHICAL_JSON'
-#          TIMESTAMP_VAL : ${{ steps.timestamp.outputs.TIMESTAMP }}
           
-      - name: Create DevHash
+      - name: Generate DevHash
         id: devhash
         run: |    
           echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}"i9gc71po2CQSNckiUD44yc9uGzWSGTWO" | md5sum | awk '{print $1}' > hash.txt
-          echo ${{ steps.timestamp.outputs.TIMESTAMP }}
-          echo  cat hash.txt
           echo "DEVHASH=$(cat hash.txt)" >> $GITHUB_OUTPUT 
-          echo ${{ steps.devhash.outputs.DEVHASH }}
         
         
 #          echo "DEVHASH=$(echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum | awk '{print $1}' )" >> $GITHUB_OUTPUT
@@ -33,15 +26,18 @@ jobs:
           
 #          echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum 
 #          echo "DEVHASH=$( echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum )" >>$GITHUB_OUTPUT
-
+      - name: Print Variables
+        run: |
+          echo TIMESTAMP = ${{ steps.timestamp.outputs.TIMESTAMP }}        
+          echo DEVHASH = ${{ steps.devhash.outputs.DEVHASH }}
           
-      - name: Upload To Onesky    
+      - name: Trigger Upload API    
         env:
           FILE_PATH: 'src/main/resources/uploadToOneSky/zzz.json'
           FILE_FORMAT: 'HIERARCHICAL_JSON'
+          PROJECT_ID : 388361
         run: |
-          echo ${{ steps.devhash.outputs.DEVHASH }}
-          curl -X POST https://platform.api.onesky.io/1/projects/:project_id/files \
+          curl -X POST https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files \
           -H 'Content-Type: application/json' \
           -d '{"api_key": "S2RQU74NzKwdNHlxagszjsTPRGyoqk39", "timestamp": ${{ steps.timestamp.outputs.TIMESTAMP }}, \ 
           "dev_hash": ${{ steps.devhash.outputs.DEVHASH }}, "file": "${{ env.FILE_PATH }}", "file_format": ${{ env.FILE_FORMAT }} }'
