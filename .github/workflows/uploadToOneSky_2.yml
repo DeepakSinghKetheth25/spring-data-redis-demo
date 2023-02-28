@@ -1,0 +1,35 @@
+name: Upload translation file upload
+
+on:
+  schedule:
+  - cron: '* * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Upload API
+        id: timestamp
+        run: |
+          echo "::set-output name=TIMESTAMP::$(date +%s)"
+          echo ${{ steps.timestamp.outputs.TIMESTAMP }}
+#        env:
+#          FILE_PATH: 'src/main/resources/uploadToOneSky/onesky.json'
+#          FILE_FORMAT: 'HIERARCHICAL_JSON'
+#          TIMESTAMP_VAL : ${{ steps.timestamp.outputs.TIMESTAMP }}
+          
+      - name: Create DevHash
+        id: devhash
+        run: |          
+          echo -n  ${{ env.TIMESTAMP }}"i9gc71po2CQSNckiUD44yc9uGzWSGTWO" | md5sum | awk '{print $1}' > hash.txt
+          echo "::set-output name=DEVHASH::$(cat hash.txt)"
+          echo ${{ steps.devhash.outputs.DEVHASH }}
+      - name: Upload To Onesky    
+        env:
+          FILE_PATH: 'src/main/resources/uploadToOneSky/zzz.json'
+          FILE_FORMAT: 'HIERARCHICAL_JSON'
+        run: |
+          curl -X POST https://platform.api.onesky.io/1/projects/:project_id/files \
+          -H 'Content-Type: application/json' \
+          -d '{"api_key": "S2RQU74NzKwdNHlxagszjsTPRGyoqk39", "timestamp": ${{ steps.timestamp.outputs.TIMESTAMP }}, \ 
+          "dev_hash": ${{ steps.devhash.outputs.DEVHASH }}, "file": "${{ env.FILE_PATH }}", "file_format": ${{ env.FILE_FORMAT }} }'
