@@ -15,7 +15,7 @@ jobs:
         id: timestamp
         run: |
           echo "TIMESTAMP=$(date +%s)" >>$GITHUB_OUTPUT
-          echo "WORK_DIR=$env:GITHUB_WORKSPACE" >>$GITHUB_OUTPUT
+          echo "WORK_DIR=$GITHUB_WORKSPACE" >>$GITHUB_OUTPUT
           
       - name: Generate DevHash
         id: devhash
