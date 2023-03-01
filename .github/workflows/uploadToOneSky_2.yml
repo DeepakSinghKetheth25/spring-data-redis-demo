@@ -1,8 +1,8 @@
 name: Upload translation file Using Upload API
 
 on:
-  schedule:
-  - cron: '* * * * 4' 
+  # Allows this workflow to be triggered by another workflow
+  workflow_call:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
