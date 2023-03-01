@@ -45,7 +45,7 @@ jobs:
           FILE_FORMAT: 'HIERARCHICAL_JSON'
           PROJECT_ID : 388361
         run: |
-          curl -v -F api_key=S2RQU74NzKwdNHlxagszjsTPRGyoqk39 -F timestamp=${{ steps.timestamp.outputs.TIMESTAMP }} -F dev_hash=${{ steps.devhash.outputs.DEVHASH }} -F "file=@{{$env:GITHUB_WORKSPACE}}${{ env.FILE_PATH }}" -F file_format=${{ env.FILE_FORMAT }}  "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files"
+          curl -v -F api_key=S2RQU74NzKwdNHlxagszjsTPRGyoqk39 -F timestamp=${{ steps.timestamp.outputs.TIMESTAMP }} -F dev_hash=${{ steps.devhash.outputs.DEVHASH }} -F "file=@$env:GITHUB_WORKSPACE${{ env.FILE_PATH }}" -F file_format=${{ env.FILE_FORMAT }}  "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files"
     
 #          curl -X POST "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files" \
 #          -H 'Content-Type: multipart/form-data' \
