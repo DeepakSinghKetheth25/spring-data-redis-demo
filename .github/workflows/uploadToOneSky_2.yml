@@ -36,7 +36,7 @@ jobs:
 
       - name: List OneSKY Files API
         run: |
-          curl https://platform.api.onesky.io/1/projects/388361/files?api_key=S2RQU74NzKwdNHlxagszjsTPRGyoqk39&timestamp=${{ steps.timestamp.outputs.TIMESTAMP }}&dev_hash=${{ steps.devhash.outputs.DEVHASH }}
+          curl "https://platform.api.onesky.io/1/projects/388361/files?api_key=S2RQU74NzKwdNHlxagszjsTPRGyoqk39&timestamp=${{ steps.timestamp.outputs.TIMESTAMP }}&dev_hash=${{ steps.devhash.outputs.DEVHASH }}"
 
 
       - name: Trigger Upload API    
