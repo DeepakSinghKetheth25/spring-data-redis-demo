@@ -45,10 +45,10 @@ jobs:
           FILE_FORMAT: 'HIERARCHICAL_JSON'
           PROJECT_ID : 388361
         run: |
-          curl -X POST "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files \
+          curl -X POST "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files" \
           -H 'Content-Type: multipart/form-data' \
           -d '{"api_key": "S2RQU74NzKwdNHlxagszjsTPRGyoqk39", "timestamp": "${{ steps.timestamp.outputs.TIMESTAMP }}", \ 
-          "dev_hash": "${{ steps.devhash.outputs.DEVHASH }}", "file": "@${{ env.FILE_PATH }}", "file_format": "${{ env.FILE_FORMAT }}" }' "    
+          "dev_hash": "${{ steps.devhash.outputs.DEVHASH }}", "file": "@${{ env.FILE_PATH }}", "file_format": "${{ env.FILE_FORMAT }}" }'   
 
 
 #          curl -X POST https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files \
