@@ -41,7 +41,7 @@ jobs:
 
       - name: Trigger Upload API    
         env:
-          FILE_PATH: 'src/main/resources/uploadToOneSky/zzz.json'
+          FILE_PATH: '/src/main/resources/uploadToOneSky/zzz.json'
           FILE_FORMAT: 'HIERARCHICAL_JSON'
           PROJECT_ID : 388361
         run: |
