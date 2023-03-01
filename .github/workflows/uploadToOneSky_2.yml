@@ -47,8 +47,11 @@ jobs:
         run: |
           curl -X POST "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files" \
           -H 'Content-Type: multipart/form-data' \
-          -F '{"api_key": "S2RQU74NzKwdNHlxagszjsTPRGyoqk39", "timestamp": "${{ steps.timestamp.outputs.TIMESTAMP }}", \ 
-          "dev_hash": "${{ steps.devhash.outputs.DEVHASH }}", "file" : "@${{ env.FILE_PATH }}",  "file_format": "${{ env.FILE_FORMAT }}" }'
+          -F "api_key : S2RQU74NzKwdNHlxagszjsTPRGyoqk39" \
+          -F "timestamp : ${{ steps.timestamp.outputs.TIMESTAMP }}" \ 
+          -F "dev_hash : ${{ steps.devhash.outputs.DEVHASH }}" \ 
+          -F "file : @${{ env.FILE_PATH }}" \
+          -F "file_format : ${{ env.FILE_FORMAT }}"
 
 
 #          curl -X POST https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files \
