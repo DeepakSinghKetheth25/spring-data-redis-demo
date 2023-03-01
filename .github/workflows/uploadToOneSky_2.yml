@@ -27,13 +27,6 @@ jobs:
           echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}"i9gc71po2CQSNckiUD44yc9uGzWSGTWO" | md5sum | awk '{print $1}' > hash.txt
           echo "DEVHASH=$(cat hash.txt)" >> $GITHUB_OUTPUT 
         
-        
-#          echo "DEVHASH=$(echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum | awk '{print $1}' )" >> $GITHUB_OUTPUT
-#          echo ${{ steps.timestamp.outputs.TIMESTAMP }}
-#          echo ${{ steps.devhash.outputs.DEVHASH }}
-          
-#          echo -n ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum 
-#          echo "DEVHASH=$( echo -n  ${{ steps.timestamp.outputs.TIMESTAMP }}'i9gc71po2CQSNckiUD44yc9uGzWSGTWO' | md5sum )" >>$GITHUB_OUTPUT
       - name: Print Variables
         run: |
           echo TIMESTAMP = ${{ steps.timestamp.outputs.TIMESTAMP }}        
@@ -51,19 +44,10 @@ jobs:
           FILE_FORMAT: 'HIERARCHICAL_JSON'
           PROJECT_ID : 388361
         run: |
-          curl -v -F api_key=S2RQU74NzKwdNHlxagszjsTPRGyoqk39 -F timestamp=${{ steps.timestamp.outputs.TIMESTAMP }} -F dev_hash=${{ steps.devhash.outputs.DEVHASH }} -F "file=@${{ steps.timestamp.outputs.WORK_DIR }}${{ env.FILE_PATH }}" -F file_format=${{ env.FILE_FORMAT }}  "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files"
+          curl -v -F api_key=S2RQU74NzKwdNHlxagszjsTPRGyoqk39 \
+          -F timestamp=${{ steps.timestamp.outputs.TIMESTAMP }} \
+          -F dev_hash=${{ steps.devhash.outputs.DEVHASH }} \
+          -F "file=@${{ steps.timestamp.outputs.WORK_DIR }}${{ env.FILE_PATH }}" \
+          -F file_format=${{ env.FILE_FORMAT }}  \
+          "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files"
     
-#          curl -X POST "https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files" \
-#          -H 'Content-Type: multipart/form-data' \
-#          -F "api_key : S2RQU74NzKwdNHlxagszjsTPRGyoqk39" \
-#          -F "timestamp : ${{ steps.timestamp.outputs.TIMESTAMP }}" \ 
-#          -F "dev_hash : ${{ steps.devhash.outputs.DEVHASH }}" \ 
-#          -F "file : @${{ env.FILE_PATH }}" \
-#          -F "file_format : ${{ env.FILE_FORMAT }}"
-
-
-#          curl -X POST https://platform.api.onesky.io/1/projects/${{ env.PROJECT_ID }}/files \
-#          -H 'Content-Type: multipart/form-data' \
-#          -d '{"api_key": "S2RQU74NzKwdNHlxagszjsTPRGyoqk39", "timestamp": ${{ steps.timestamp.outputs.TIMESTAMP }}, \ 
-#          "dev_hash": ${{ steps.devhash.outputs.DEVHASH }}, "file": "${{ env.FILE_PATH }}", "file_format": ${{ env.FILE_FORMAT }} }'       
-
